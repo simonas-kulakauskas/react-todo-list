@@ -8,5 +8,15 @@ export let todoListItems = [
         key: 1,
         itemValue: "Hey!",
         checkedOff: false
+    },
+    {
+        key: 2,
+        itemValue: "HIya!",
+        checkedOff: false
+    },
+    {
+        key: 3,
+        itemValue: "Wow it's working",
+        checkedOff: false
     }
 ];
