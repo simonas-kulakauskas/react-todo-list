@@ -3,15 +3,21 @@ import './App.css'
 import { todoListItems } from './data';
 
 
-function RenderListItems({ currentListItems }) { /* Render's the items of the list*/
+function RenderListItems({ currentListItems, setCurrentListItems }) { /* Render's the items of the list*/
+  function handleToggle(itemKey) {
+    // currentListItems ? setCurrentListItems([...currentListItems, currentListItems[itemKey].checkedOff = false]) : setCurrentListItems([...currentListItems, currentListItems[itemKey].checkedOff = true]); 
+    console.log(currentListItems[itemKey])
+    setCurrentListItems(...currentListItems)
+  } 
+
   return (
-    <ul>
+    <>
       {currentListItems.map((item) => { // Iterating through all items.
         return (
-          item.checkedOff ? <li key={item.key}><s>{item.itemValue}</s></li> : <li key={item.key}>{item.itemValue}</li> // Check off if needed.
+          item.checkedOff ? <li key={item.key} onClick={() => handleToggle(item.key)}><s>{item.itemValue}</s></li> : <li key={item.key} onClick={() => handleToggle(item.key)} >{item.itemValue}</li> // Check off if needed.
         );
       })}
-    </ul>
+    </>
   ); 
 }
 
@@ -19,6 +25,7 @@ function RenderTodoForm() { /* Renders the list and holds it's logic */
     const [currentListItems, setCurrentListItems] = useState(todoListItems);
   
     function handleClick(value) {
+      document.getElementById('itemInput').value = "";
       setCurrentListItems([
         ...currentListItems,
         {
@@ -39,7 +46,9 @@ function RenderTodoForm() { /* Renders the list and holds it's logic */
                 handleClick(document.getElementById("itemInput").value)
                 }}>Add</button>
         </form>
-        <RenderListItems currentListItems={currentListItems}/>
+        <ul>
+          <RenderListItems currentListItems={currentListItems} setCurrentListItems={setCurrentListItems} />
+        </ul>
       </>
     );
   }
