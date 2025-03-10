@@ -44,7 +44,7 @@ function RenderTodoForm() { /* Renders the list and holds it's logic */
     );
   }
 
-function App() {
+export default function App() {
   return (
     <>
       <h1>To-do List: </h1>
@@ -52,5 +52,3 @@ function App() {
     </>
   );
 }
-
- App
