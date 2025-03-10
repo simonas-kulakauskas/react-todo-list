@@ -3,18 +3,12 @@ import './App.css'
 import { todoListItems } from './data';
 
 
-function RenderListItems({ currentListItems, setCurrentListItems }) { /* Render's the items of the list*/
-  function handleToggle(itemKey) {
-    // currentListItems ? setCurrentListItems([...currentListItems, currentListItems[itemKey].checkedOff = false]) : setCurrentListItems([...currentListItems, currentListItems[itemKey].checkedOff = true]); 
-    console.log(currentListItems[itemKey])
-    setCurrentListItems(...currentListItems)
-  } 
-
+function RenderListItems({ currentListItems }) { /* Render's the items of the list*/
   return (
     <>
       {currentListItems.map((item) => { // Iterating through all items.
         return (
-          item.checkedOff ? <li key={item.key} onClick={() => handleToggle(item.key)}><s>{item.itemValue}</s></li> : <li key={item.key} onClick={() => handleToggle(item.key)} >{item.itemValue}</li> // Check off if needed.
+          item.checkedOff ? <li key={item.key}><s>{item.itemValue}</s></li> : <li key={item.key}>{item.itemValue}</li> // Check off if needed.
         );
       })}
     </>
@@ -47,7 +41,7 @@ function RenderTodoForm() { /* Renders the list and holds it's logic */
                 }}>Add</button>
         </form>
         <ul>
-          <RenderListItems currentListItems={currentListItems} setCurrentListItems={setCurrentListItems} />
+          <RenderListItems currentListItems={currentListItems}/>
         </ul>
       </>
     );
