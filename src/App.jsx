@@ -25,7 +25,9 @@ function App() {
       <h1>To Do List: </h1>
 
       <form>
-
+        <label htmlFor=''>New Item: </label>
+        <input type='text' id='itemInput' name='itemInput' placeholder='Enter here...'></input>
+        <button>Add</button>
       </form>
       
       <DisplayTodoList currentListItems={todoListItems}/>
