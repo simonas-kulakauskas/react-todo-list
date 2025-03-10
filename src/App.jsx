@@ -15,8 +15,14 @@ function DisplayTodoList({ currentListItems }) {
   ); 
 }
 
-function AddToList() {
-
+function DisplayListAddForm() {
+  return(
+    <form>
+          <label htmlFor=''>New Item: </label>
+          <input type='text' id='itemInput' name='itemInput' placeholder='Enter here...'></input>
+          <button>Add</button>
+    </form>
+  );
 }
 
 function App() {
@@ -24,12 +30,8 @@ function App() {
     <>
       <h1>To Do List: </h1>
 
-      <form>
-        <label htmlFor=''>New Item: </label>
-        <input type='text' id='itemInput' name='itemInput' placeholder='Enter here...'></input>
-        <button>Add</button>
-      </form>
-      
+      <DisplayListAddForm />
+    
       <DisplayTodoList currentListItems={todoListItems}/>
     </>
   );
