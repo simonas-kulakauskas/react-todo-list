@@ -2,6 +2,14 @@ import { useState } from 'react'
 import { todoListItems } from './data';
 import './App.css'
 
+
+/*
+TODO: Should try to refactor some code to make it more legible, and better describe what functions are doing.
+TODO: Should try to 'distil' down some of my functions to more simpler ones that do *ONE JOB*.
+
+TODO: Still need to implement the 'checkedOff' feature
+*/
+
 function RenderListItems({ currentListItems }) { /* Render's the items of the list*/
   return (
     <>
