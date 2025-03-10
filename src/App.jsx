@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import './App.css'
 import { todoListItems } from './data';
-
+import './App.css'
 
 function RenderListItems({ currentListItems }) { /* Render's the items of the list*/
   return (
@@ -17,7 +16,6 @@ function RenderListItems({ currentListItems }) { /* Render's the items of the li
 
 function RenderTodoForm() { /* Renders the list and holds it's logic */
     const [currentListItems, setCurrentListItems] = useState(todoListItems);
-  
     function handleClick(value) {
       document.getElementById('itemInput').value = "";
       setCurrentListItems([
@@ -29,7 +27,6 @@ function RenderTodoForm() { /* Renders the list and holds it's logic */
         }
       ])
     }
-  
     return (
       <>
         <form>
@@ -56,4 +53,4 @@ function App() {
   );
 }
 
-export default App
+ App
