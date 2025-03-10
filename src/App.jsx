@@ -16,11 +16,15 @@ function DisplayTodoList({ currentListItems }) {
 }
 
 function DisplayListAddForm() {
-  return(
+  function handleClick() {
+    alert("I've been pressed!")
+  }
+
+  return (
     <form>
           <label htmlFor=''>New Item: </label>
           <input type='text' id='itemInput' name='itemInput' placeholder='Enter here...'></input>
-          <button>Add</button>
+          <button onClick={handleClick}>Add</button>
     </form>
   );
 }
