@@ -9,7 +9,7 @@ import './App.css'
 * 4. Add the ability to save to-do items locally.                                     [✅] 
 * 5. Individual delete buttons for items                                              [✅]
 *   5b. Fix delete buttons...                                                         [✅]
-* 6. Reduce the return code for DisplayListItems()                                    [❌]
+* 6. Reduce the return code for DisplayListItems()                                    [✅]
 */
 
 function App() {
@@ -45,26 +45,16 @@ function App() {
     }
 
     return (
-      listItems.map((item) => { // ! HERE <-----
-        if (item.checked) {
-          return (
-            <li key={item.key}>
-              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={true}></input> 
-              <s><label htmlFor={item.key}>{item.value}</label></s>
-              <button onClick={() => deleteListItem(item.key)}>X</button>
-            </li>
-          );
-        } else {
-          return (
-            <li key={item.key}>
-              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={false}></input> 
-              <label htmlFor={item.key}>{item.value}</label>
-              <button onClick={() => deleteListItem(item.key)}>X</button>
-            </li>
-          );
-        }
+      listItems.map((item) => { // Render's list items with style and values depending on the item's own properties
+        return (
+          <li key={item.key}>
+            <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={item.checked}></input> 
+            <label htmlFor={item.key} style={item.checked ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}>{item.value}</label>
+            <button onClick={() => deleteListItem(item.key)}>X</button>
+          </li>
+        );
       })
-    );
+    )
   }
   
   function AddListItem() {
