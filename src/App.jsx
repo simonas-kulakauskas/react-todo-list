@@ -8,19 +8,19 @@ import './App.css'
 * 3. Add checkmarks and ability to check / cross-out tasks that have been completed.  [✅]     
 * 4. Add the ability to save to-do items locally.                                     [✅] 
 * 5. Individual delete buttons for items                                              [✅]
-*   5b. Fix delete buttons...                                                         [✅]
+*   5b. Fix delete buttons...                                                         [❌]
 */
 
 function App() {
 
-  const [newListItems, setNewListItems] = useLocalStorage('TODO_LIST_ITEMS', []);
+  const [listItems, setListItems] = useLocalStorage('TODO_LIST_ITEMS', []);
   
   useEffect(() => {
-    window.localStorage.setItem('TODO_LIST_ITEMS', JSON.stringify(newListItems))
-  }, [newListItems])
+    window.localStorage.setItem('TODO_LIST_ITEMS', JSON.stringify(listItems))
+  }, [listItems])
 
   function toggleCheckBox(itemKey) {
-    setNewListItems(newListItems.map((item) => {
+    setListItems(listItems.map((item) => {
       if (item.key === itemKey) {
         return {
           ...item,
@@ -33,20 +33,19 @@ function App() {
   }
 
   function deleteListItem(itemKey) {
-    setNewListItems(newListItems.filter((item) => item.key !== itemKey))
+    setListItems(listItems.filter((item) => item.key !== itemKey))
   }
 
 
   function DisplayListItems() {
-
-    if (newListItems.length === 0) {
+    if (listItems.length === 0) {
         return (
           <h3>Please add an item to your list to begin!</h3>
         )
     }
 
     return (
-      newListItems.map((item) => {
+      listItems.map((item) => {
         if (item.checked) {
           return (
             <li key={item.key}>
@@ -70,14 +69,13 @@ function App() {
   
   function AddListItem() {
     const resetInputBox = () => document.getElementById("todoItemInputBox").value = "";
-    
-    const getNextKey = () => newListItems.length ? (newListItems[newListItems.length-1].key + 1) : (0);
+    const getNextKey = () => listItems.length ? (listItems[listItems.length-1].key + 1) : (0);
 
     function handleAddItem(newValue) {
       resetInputBox();
       if (newValue.trim() !== "") { // Don't add item if it's empty...
-        setNewListItems([
-          ...newListItems,
+        setListItems([
+          ...listItems,
           {
             key: getNextKey(),
             value: newValue,
