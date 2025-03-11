@@ -18,7 +18,10 @@ function App() {
     return (
       newListItems.map((item) => {
         return (
-          <li key={item.key}>{item.value}</li>
+          <li key={item.key}>
+            <input type="checkbox"  id={item.key}></input>
+            <label htmlFor={item.key}>{item.value}</label>
+          </li>
         );
       })
     );
