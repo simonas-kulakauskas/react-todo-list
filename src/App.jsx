@@ -87,9 +87,9 @@ function App() {
       <h1>To-do List: </h1>
       
       {/* Inset code below*/}
-      <AddListItem listItems={todoListItems}/>
+      <AddListItem />
       <ul>
-        <DisplayListItems listItems={todoListItems} />
+        <DisplayListItems />
       </ul>
     </>
   );
