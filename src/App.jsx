@@ -8,7 +8,8 @@ import './App.css'
 * 3. Add checkmarks and ability to check / cross-out tasks that have been completed.  [✅]     
 * 4. Add the ability to save to-do items locally.                                     [✅] 
 * 5. Individual delete buttons for items                                              [✅]
-*   5b. Fix delete buttons...                                                         [❌]
+*   5b. Fix delete buttons...                                                         [✅]
+* 6. Reduce the return code for DisplayListItems()                                    [❌]
 */
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
     }
 
     return (
-      listItems.map((item) => {
+      listItems.map((item) => { // ! HERE <-----
         if (item.checked) {
           return (
             <li key={item.key}>
