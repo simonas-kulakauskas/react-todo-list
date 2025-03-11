@@ -1,62 +1,93 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import { todoListItems } from './data';
+import { useState } from 'react';
 import './App.css'
 
 
-/*
-TODO: Should try to refactor some code to make it more legible, and better describe what functions are doing.
-TODO: Should try to 'distil' down some of my functions to more simpler ones that do *ONE JOB*.
-
-TODO: Still need to implement the 'checkedOff' feature
+/* ✅/
+* 1. Get data from 'data.js' and render as list items on unordered list.              [✅] 
+* 2. Add the ability to add items to our own state list.                              [✅] 
+* 3. Add checkmarks and ability to check / cross-out tasks that have been completed.  [✅]     
+* 4. Add the ability to save to-do items locally.                                     [❌] 
 */
 
-function RenderListItems({ currentListItems }) { /* Render's the items of the list*/
-  return (
-    <>
-      {currentListItems.map((item) => { // Iterating through all items.
-        return (
-          item.checkedOff ? <li key={item.key}><s>{item.itemValue}</s></li> : <li key={item.key}>{item.itemValue}</li> // Check off if needed.
-        );
-      })}
-    </>
-  ); 
-}
+function App() {
+  const [newListItems, setNewListItems] = useState(todoListItems);
 
-function RenderTodoForm() { /* Renders the list and holds it's logic */
-    const [currentListItems, setCurrentListItems] = useState(todoListItems);
-    function handleClick(value) {
-      document.getElementById('itemInput').value = "";
-      setCurrentListItems([
-        ...currentListItems,
-        {
-          key: currentListItems.length + 1,
-          itemValue: value,
-          checkedOff: false
+  function toggleCheckBox(itemKey) {
+    setNewListItems(newListItems.map((item) => {
+      if (item.key === itemKey) {
+        return {
+          ...item,
+          checked: !item.checked
         }
-      ])
-    }
+      } else {
+        return item;
+      }
+    }))
+  }
+
+  function DisplayListItems() {
     return (
-      <>
-        <form>
-              <label htmlFor='itemInput'>New Item: </label>
-              <input type='text' id='itemInput' name='itemInput' placeholder='Enter here...'></input>
-              <button onClick={e => {
-                e.preventDefault(); 
-                handleClick(document.getElementById("itemInput").value)
-                }}>Add</button>
-        </form>
-        <ul>
-          <RenderListItems currentListItems={currentListItems}/>
-        </ul>
-      </>
+      newListItems.map((item) => {
+        if (item.checked) {
+          return (
+            <li key={item.key}>
+              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={true}></input> 
+              <s><label htmlFor={item.key}>{item.value}</label></s>
+            </li>
+          );
+        } else {
+          return (
+            <li key={item.key}>
+              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={false}></input> 
+              <label htmlFor={item.key}>{item.value}</label>
+            </li>
+          );
+        }
+      })
+    );
+  }
+  
+  function AddListItem() {
+    const resetInputBox = () => document.getElementById("todoItemInputBox").value = "";
+
+    function handleAddItem(newValue) {
+      resetInputBox();
+      if (newValue.trim() !== "") { // Don't add item if it's empty...
+        setNewListItems([
+          ...newListItems,
+          {
+            key: newListItems.length + 1,
+            value: newValue,
+            checked: false
+          }
+        ])
+      }
+    }
+  
+    return (
+      <form>
+        <input id="todoItemInputBox" type="text" placeholder="Enter item here..."></input>
+        <button type="submit" onClick={(e) => {
+          e.preventDefault();
+          handleAddItem(document.getElementById("todoItemInputBox").value);
+          }}>Click</button>
+      </form>
     );
   }
 
-export default function App() {
   return (
     <>
       <h1>To-do List: </h1>
-      <RenderTodoForm />
+      
+      {/* Inset code below*/}
+      <AddListItem listItems={todoListItems}/>
+      <ul>
+        <DisplayListItems listItems={todoListItems} />
+      </ul>
     </>
   );
 }
+
+export default App;

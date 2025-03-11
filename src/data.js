@@ -1,22 +1,22 @@
 export let todoListItems = [
     {
         key: 0,
-        itemValue: "Hello!",
-        checkedOff: true
+        value: "Hello!",
+        checked: true
     },
     {
         key: 1,
-        itemValue: "Hey!",
-        checkedOff: false
+        value: "Hey!",
+        checked: false
     },
     {
         key: 2,
-        itemValue: "HIya!",
-        checkedOff: false
+        value: "HIya!",
+        checked: true
     },
     {
         key: 3,
-        itemValue: "Wow it's working",
-        checkedOff: false
+        value: "Wow it's working",
+        checked: false
     }
 ];
