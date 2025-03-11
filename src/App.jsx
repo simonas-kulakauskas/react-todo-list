@@ -11,62 +11,40 @@ import './App.css'
 *   5b. Fix delete buttons...                                                         [✅]
 * 6. Reduce the return code for DisplayListItems()                                    [✅]
 */
+function AddListItem({listItems, setListItems}) { // Adding items onto the list
+  const resetInputBox = () => document.getElementById("todoItemInputBox").value = "";
+  const getNextKey = () => listItems.length ? (listItems[listItems.length-1].key + 1) : (0);
 
-function App() {
-
-  const [listItems, setListItems] = useLocalStorage('TODO_LIST_ITEMS', []); // Grab local todo list, otherwise set to empty array
-  
-  useEffect(() => { // Stores todo list locally after every re-render
-    window.localStorage.setItem('TODO_LIST_ITEMS', JSON.stringify(listItems))
-  }, [listItems])
-  
-  function DisplayListItems() {
-    if (listItems.length === 0) { // Show hint if todo list is empty
-        return (
-          <h3>Please add an item to your list to begin!</h3>
-        )
+  function handleAddItem(newValue) {
+    resetInputBox();
+    if (newValue.trim() !== "") { // Don't add item if it's empty...
+      setListItems([
+        ...listItems,
+        {
+          key: getNextKey(),
+          value: newValue,
+          checked: false
+        }
+      ])
     }
-
-    return (
-      listItems.map((item) => { // Render's list items with style and values depending on the item's own properties
-        return (
-          <li key={item.key}>
-            <input type="checkbox" id={item.key} onChange={() => handleToggleCheckBox(item.key)} checked={item.checked}></input> 
-            <label htmlFor={item.key} style={item.checked ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}>{item.value}</label>
-            <button onClick={() => deleteListItem(item.key)}>X</button>
-          </li>
-        );
-      })
-    )
   }
 
-  function AddListItem() { // Adding items onto the list
-    const resetInputBox = () => document.getElementById("todoItemInputBox").value = "";
-    const getNextKey = () => listItems.length ? (listItems[listItems.length-1].key + 1) : (0);
+  return (
+    <form>
+      <input id="todoItemInputBox" type="text" placeholder="Enter item here..."></input>
+      <button type="submit" onClick={(e) => {
+        e.preventDefault();
+        handleAddItem(document.getElementById("todoItemInputBox").value);
+        }}>Click</button>
+    </form>
+  );
+}
 
-    function handleAddItem(newValue) {
-      resetInputBox();
-      if (newValue.trim() !== "") { // Don't add item if it's empty...
-        setListItems([
-          ...listItems,
-          {
-            key: getNextKey(),
-            value: newValue,
-            checked: false
-          }
-        ])
-      }
-    }
-  
-    return (
-      <form>
-        <input id="todoItemInputBox" type="text" placeholder="Enter item here..."></input>
-        <button type="submit" onClick={(e) => {
-          e.preventDefault();
-          handleAddItem(document.getElementById("todoItemInputBox").value);
-          }}>Click</button>
-      </form>
-    );
+function DisplayListItems({listItems, setListItems}) {
+  if (listItems.length === 0) { // Show hint if todo list is empty
+      return (
+        <h3>Please add an item to your list to begin!</h3>
+      )
   }
 
   function deleteListItem(itemKey) {
@@ -85,16 +63,34 @@ function App() {
       }
     }))
   }
+
+  return (
+    listItems.map((item) => { // Render's list items with style and values depending on the item's own properties
+      return (
+        <li key={item.key}>
+          <input type="checkbox" id={item.key} onChange={() => handleToggleCheckBox(item.key)} checked={item.checked}></input> 
+          <label htmlFor={item.key} style={item.checked ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}>{item.value}</label>
+          <button onClick={() => deleteListItem(item.key)}>X</button>
+        </li>
+      );
+    })
+  )
+}
+
+export default function App() {
+  const [listItems, setListItems] = useLocalStorage('TODO_LIST_ITEMS', []); // Grab local todo list, otherwise set to empty array
+  
+  useEffect(() => { // Stores todo list locally after every re-render
+    window.localStorage.setItem('TODO_LIST_ITEMS', JSON.stringify(listItems))
+  }, [listItems])
   
   return (
     <>
     <h1>To-do List: </h1>
-      <AddListItem />
+      <AddListItem listItems={listItems} setListItems={setListItems}/>
       <ul>
-        <DisplayListItems />
+        <DisplayListItems listItems={listItems} setListItems={setListItems}/>
       </ul>
     </>
   );
 }
-
-export default App;
