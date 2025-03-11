@@ -20,7 +20,7 @@ function App() {
     window.localStorage.setItem('TODO_LIST_ITEMS', JSON.stringify(listItems))
   }, [listItems])
 
-  function toggleCheckBox(itemKey) { 
+  function handleToggleCheckBox(itemKey) { 
     setListItems(listItems.map((item) => {
       if (item.key === itemKey) {
         return {
@@ -48,7 +48,7 @@ function App() {
       listItems.map((item) => { // Render's list items with style and values depending on the item's own properties
         return (
           <li key={item.key}>
-            <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={item.checked}></input> 
+            <input type="checkbox" id={item.key} onChange={() => handleToggleCheckBox(item.key)} checked={item.checked}></input> 
             <label htmlFor={item.key} style={item.checked ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}>{item.value}</label>
             <button onClick={() => deleteListItem(item.key)}>X</button>
           </li>
@@ -57,7 +57,7 @@ function App() {
     )
   }
   
-  function AddListItem() {
+  function AddListItem() { // Adding items onto the list
     const resetInputBox = () => document.getElementById("todoItemInputBox").value = "";
     const getNextKey = () => listItems.length ? (listItems[listItems.length-1].key + 1) : (0);
 
