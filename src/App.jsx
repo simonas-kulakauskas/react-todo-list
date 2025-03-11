@@ -24,7 +24,10 @@ function DisplayListItems({ listItems }) {
 
 function AddListItem() {
 
+  const resetInputBox = () => document.getElementById("todoItemInputBox").value = "";
+  
   function handleAddItem(newValue) {
+    resetInputBox();
     console.log(newValue)
   }
 
@@ -33,7 +36,7 @@ function AddListItem() {
       <input id="todoItemInputBox" type="text" placeholder="Enter item here..."></input>
       <button type="submit" onClick={(e) => {
         e.preventDefault();
-        handleAddItem();
+        handleAddItem(document.getElementById("todoItemInputBox").value);
         }}>Click</button>
     </form>
   );
