@@ -13,7 +13,7 @@ import './App.css'
 function App() {
 
   const [newListItems, setNewListItems] = useLocalStorage('TODO_LIST_ITEMS', []);
-
+  
   useEffect(() => {
     window.localStorage.setItem('TODO_LIST_ITEMS', JSON.stringify(newListItems))
   }, [newListItems])
@@ -31,21 +31,35 @@ function App() {
     }))
   }
 
+  function deleteListItem(itemKey) {
+    setNewListItems(newListItems.filter((item) => item.key !== itemKey))
+  }
+
+
   function DisplayListItems() {
+
+    if (newListItems.length === 0) {
+        return (
+          <h3>Please add an item to your list to begin!</h3>
+        )
+    }
+
     return (
-      newListItems.map((item) => {
+      newListItems.map((item, index) => {
         if (item.checked) {
           return (
-            <li key={item.key}>
-              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={true}></input> 
-              <s><label htmlFor={item.key}>{item.value}</label></s>
+            <li key={index}>
+              <input type="checkbox" id={index} onChange={() => toggleCheckBox(item.key)} checked={true}></input> 
+              <s><label htmlFor={index}>{item.value}</label></s>
+              <button onClick={() => deleteListItem(item.key)}>X</button>
             </li>
           );
         } else {
           return (
-            <li key={item.key}>
-              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={false}></input> 
-              <label htmlFor={item.key}>{item.value}</label>
+            <li key={index}>
+              <input type="checkbox" id={index} onChange={() => toggleCheckBox(item.key)} checked={false}></input> 
+              <label htmlFor={index}>{item.value}</label>
+              <button onClick={() => deleteListItem(item.key)}>X</button>
             </li>
           );
         }
