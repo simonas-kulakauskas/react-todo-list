@@ -22,11 +22,32 @@ function DisplayListItems({ listItems }) {
   );
 }
 
+function AddListItem() {
+
+  function handleAddItem(newValue) {
+    console.log(newValue)
+  }
+
+  return (
+    <form>
+      <input id="todoItemInputBox" type="text" placeholder="Enter item here..."></input>
+      <button type="submit" onClick={(e) => {
+        e.preventDefault();
+        handleAddItem();
+        }}>Click</button>
+    </form>
+  );
+}
+
+
+
 function App() {
   return (
     <>
       <h1>To-do List: </h1>
       {/* Inset code below*/}
+
+      <AddListItem />
       <ul>
         <DisplayListItems listItems={todoListItems} />
       </ul>
