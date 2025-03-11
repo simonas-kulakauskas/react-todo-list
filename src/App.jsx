@@ -13,13 +13,13 @@ import './App.css'
 
 function App() {
 
-  const [listItems, setListItems] = useLocalStorage('TODO_LIST_ITEMS', []);
+  const [listItems, setListItems] = useLocalStorage('TODO_LIST_ITEMS', []); // Grab local todo list, otherwise set to empty array
   
-  useEffect(() => {
+  useEffect(() => { // Stores todo list locally after every re-render
     window.localStorage.setItem('TODO_LIST_ITEMS', JSON.stringify(listItems))
   }, [listItems])
 
-  function toggleCheckBox(itemKey) {
+  function toggleCheckBox(itemKey) { 
     setListItems(listItems.map((item) => {
       if (item.key === itemKey) {
         return {
@@ -36,9 +36,8 @@ function App() {
     setListItems(listItems.filter((item) => item.key !== itemKey))
   }
 
-
   function DisplayListItems() {
-    if (listItems.length === 0) {
+    if (listItems.length === 0) { // Show hint if todo list is empty
         return (
           <h3>Please add an item to your list to begin!</h3>
         )
