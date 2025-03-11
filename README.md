@@ -7,7 +7,7 @@ This website is simply made for me to practice and learn how to use React and it
 - [x] Adding items to a (temporary) list -- (doesn't save after refresh).
 - [x] Ability to strike out/check items on list that are complete.
 - [x] Save list locally through cookies or otherwise.
-- [ ] Delete list items with dedicated button.
+- [x] Delete list items with dedicated button.
 
 
 ## Framework/Stack
