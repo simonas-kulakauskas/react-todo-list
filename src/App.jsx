@@ -11,6 +11,7 @@ import './App.css'
 *   5b. Fix delete buttons...                                                         [✅]
 * 6. Reduce the return code for DisplayListItems()                                    [✅]
 */
+
 function AddListItem({listItems, setListItems}) { // Adding items onto the list
   const resetInputBox = () => document.getElementById("todoItemInputBox").value = "";
   const getNextKey = () => listItems.length ? (listItems[listItems.length-1].key + 1) : (0);
@@ -63,15 +64,20 @@ function DisplayListItems({listItems, setListItems}) {
       }
     }))
   }
-
-  return (
-    listItems.map((item) => { // Render's list items with style and values depending on the item's own properties
-      return (
-        <li key={item.key}>
+  
+  function ListItem({item, handleToggleCheckBox, deleteListItem}) {
+    return(
+      <li key={item.key}>
           <input type="checkbox" id={item.key} onChange={() => handleToggleCheckBox(item.key)} checked={item.checked}></input> 
           <label htmlFor={item.key} style={item.checked ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}>{item.value}</label>
           <button onClick={() => deleteListItem(item.key)}>X</button>
-        </li>
+      </li>
+    )
+  }
+  return (
+    listItems.map((item) => { // Render's list items with style and values depending on the item's own properties
+      return (
+        <ListItem key={item.key} item={item} handleToggleCheckBox={handleToggleCheckBox} deleteListItem={deleteListItem}></ListItem>
       );
     })
   )
