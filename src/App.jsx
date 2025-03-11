@@ -15,14 +15,15 @@ function App() {
   const [newListItems, setNewListItems] = useState(todoListItems);
 
   function DisplayListItems() {
+    
     return (
       newListItems.map((item) => {
-        return (
-          <li key={item.key}>
-            <input type="checkbox"  id={item.key}></input>
-            <label htmlFor={item.key}>{item.value}</label>
-          </li>
-        );
+       return ( 
+        <li key={item.key}>
+          <input type="checkbox" id={item.key} onChange={() => console.log("Changed item key" + item.key)} checked={item.checked}></input> 
+          <label htmlFor={item.key}>{item.value}</label>
+        </li>
+       );
       })
     );
   }
@@ -38,6 +39,7 @@ function App() {
           {
             key: newListItems.length + 1,
             value: newValue,
+            checked: false
           }
         ])
       }
