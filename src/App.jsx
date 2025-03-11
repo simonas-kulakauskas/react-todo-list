@@ -14,13 +14,16 @@ import './App.css'
 function App() {
   const [newListItems, setNewListItems] = useState(todoListItems);
 
+  // function toggleCheckBox(item) {
+     // TODO: Implement the 3rd objective.
+  // }
+
   function DisplayListItems() {
-    
     return (
       newListItems.map((item) => {
        return ( 
         <li key={item.key}>
-          <input type="checkbox" id={item.key} onChange={() => console.log("Changed item key" + item.key)} checked={item.checked}></input> 
+          <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item)} checked={item.checked}></input> 
           <label htmlFor={item.key}>{item.value}</label>
         </li>
        );
