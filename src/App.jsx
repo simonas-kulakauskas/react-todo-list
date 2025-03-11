@@ -7,7 +7,7 @@ import './App.css'
 * 2. Add the ability to add items to our own state list.                              [✅] 
 * 3. Add checkmarks and ability to check / cross-out tasks that have been completed.  [✅]     
 * 4. Add the ability to save to-do items locally.                                     [✅] 
-* 5. Individual delete buttons for items [❌]
+* 5. Individual delete buttons for items                                              [✅]
 */
 
 function App() {
