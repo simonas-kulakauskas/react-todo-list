@@ -83,7 +83,6 @@ function App() {
       
       {/* Inset code below*/}
       <AddListItem listItems={todoListItems}/>
-
       <ul>
         <DisplayListItems listItems={todoListItems} />
       </ul>
