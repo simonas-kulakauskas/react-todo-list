@@ -59,9 +59,7 @@ function DisplayListItems({listItems, setListItems}) {
           ...item,
           checked: !item.checked
         }
-      } else {
-        return item;
-      }
+      } else { return item }
     }))
   }
 
