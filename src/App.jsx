@@ -89,8 +89,6 @@ function App() {
   return (
     <>
       <h1>To-do List: </h1>
-      
-      {/* Inset code below*/}
       <AddListItem />
       <ul>
         <DisplayListItems />
