@@ -8,7 +8,7 @@ import './App.css'
 * 3. Add checkmarks and ability to check / cross-out tasks that have been completed.  [✅]     
 * 4. Add the ability to save to-do items locally.                                     [✅] 
 * 5. Individual delete buttons for items                                              [✅]
-*   5b. Fix delete buttons...                                                         [❌]
+*   5b. Fix delete buttons...                                                         [✅]
 */
 
 function App() {
@@ -46,20 +46,20 @@ function App() {
     }
 
     return (
-      newListItems.map((item, index) => {
+      newListItems.map((item) => {
         if (item.checked) {
           return (
-            <li key={index}>
-              <input type="checkbox" id={index} onChange={() => toggleCheckBox(item.key)} checked={true}></input> 
-              <s><label htmlFor={index}>{item.value}</label></s>
+            <li key={item.key}>
+              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={true}></input> 
+              <s><label htmlFor={item.key}>{item.value}</label></s>
               <button onClick={() => deleteListItem(item.key)}>X</button>
             </li>
           );
         } else {
           return (
-            <li key={index}>
-              <input type="checkbox" id={index} onChange={() => toggleCheckBox(item.key)} checked={false}></input> 
-              <label htmlFor={index}>{item.value}</label>
+            <li key={item.key}>
+              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={false}></input> 
+              <label htmlFor={item.key}>{item.value}</label>
               <button onClick={() => deleteListItem(item.key)}>X</button>
             </li>
           );
@@ -70,6 +70,8 @@ function App() {
   
   function AddListItem() {
     const resetInputBox = () => document.getElementById("todoItemInputBox").value = "";
+    
+    const getNextKey = () => newListItems.length ? (newListItems[newListItems.length-1].key + 1) : (0);
 
     function handleAddItem(newValue) {
       resetInputBox();
@@ -77,7 +79,7 @@ function App() {
         setNewListItems([
           ...newListItems,
           {
-            key: newListItems.length + 1,
+            key: getNextKey(),
             value: newValue,
             checked: false
           }
