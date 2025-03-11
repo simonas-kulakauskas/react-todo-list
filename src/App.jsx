@@ -64,7 +64,7 @@ function DisplayListItems({listItems, setListItems}) {
       }
     }))
   }
-  
+
   function ListItem({item, handleToggleCheckBox, deleteListItem}) {
     return(
       <li key={item.key}>
