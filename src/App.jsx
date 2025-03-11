@@ -7,26 +7,44 @@ import './App.css'
 /* ✅/
 * 1. Get data from 'data.js' and render as list items on unordered list.              [✅] 
 * 2. Add the ability to add items to our own state list.                              [✅] 
-* 3. Add checkmarks and ability to check / cross-out tasks that have been completed.  [❌]     
+* 3. Add checkmarks and ability to check / cross-out tasks that have been completed.  [✅]     
 * 4. Add the ability to save to-do items locally.                                     [❌] 
 */
 
 function App() {
   const [newListItems, setNewListItems] = useState(todoListItems);
 
-  // function toggleCheckBox(item) {
-     // TODO: Implement the 3rd objective.
-  // }
+  function toggleCheckBox(itemKey) {
+    setNewListItems(newListItems.map((item) => {
+      if (item.key === itemKey) {
+        return {
+          ...item,
+          checked: !item.checked
+        }
+      } else {
+        return item;
+      }
+    }))
+  }
 
   function DisplayListItems() {
     return (
       newListItems.map((item) => {
-       return ( 
-        <li key={item.key}>
-          <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item)} checked={item.checked}></input> 
-          <label htmlFor={item.key}>{item.value}</label>
-        </li>
-       );
+        if (item.checked) {
+          return (
+            <li key={item.key}>
+              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={true}></input> 
+              <s><label htmlFor={item.key}>{item.value}</label></s>
+            </li>
+          );
+        } else {
+          return (
+            <li key={item.key}>
+              <input type="checkbox" id={item.key} onChange={() => toggleCheckBox(item.key)} checked={false}></input> 
+              <label htmlFor={item.key}>{item.value}</label>
+            </li>
+          );
+        }
       })
     );
   }
