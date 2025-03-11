@@ -1,5 +1,6 @@
 // import { useState } from 'react'
-// import { todoListItems } from './data';
+import { todoListItems } from './data';
+import { useState } from 'react';
 import './App.css'
 
 
@@ -11,13 +12,26 @@ import './App.css'
 */
 
 
+function DisplayListItems({ listItems }) {
+  return (
+    listItems.map((item) => {
+      return (
+        <li key={item.key}>{item.value}</li>
+      );
+    })
+  );
+}
 
-export default function App() {
+function App() {
   return (
     <>
       <h1>To-do List: </h1>
       {/* Inset code below*/}
-
+      <ul>
+        <DisplayListItems listItems={todoListItems} />
+      </ul>
     </>
   );
 }
+
+export default App;
