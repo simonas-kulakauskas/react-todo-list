@@ -19,24 +19,7 @@ function App() {
   useEffect(() => { // Stores todo list locally after every re-render
     window.localStorage.setItem('TODO_LIST_ITEMS', JSON.stringify(listItems))
   }, [listItems])
-
-  function handleToggleCheckBox(itemKey) { 
-    setListItems(listItems.map((item) => {
-      if (item.key === itemKey) {
-        return {
-          ...item,
-          checked: !item.checked
-        }
-      } else {
-        return item;
-      }
-    }))
-  }
-
-  function deleteListItem(itemKey) {
-    setListItems(listItems.filter((item) => item.key !== itemKey))
-  }
-
+  
   function DisplayListItems() {
     if (listItems.length === 0) { // Show hint if todo list is empty
         return (
@@ -56,7 +39,7 @@ function App() {
       })
     )
   }
-  
+
   function AddListItem() { // Adding items onto the list
     const resetInputBox = () => document.getElementById("todoItemInputBox").value = "";
     const getNextKey = () => listItems.length ? (listItems[listItems.length-1].key + 1) : (0);
@@ -86,9 +69,26 @@ function App() {
     );
   }
 
+  function deleteListItem(itemKey) {
+    setListItems(listItems.filter((item) => item.key !== itemKey))
+  }
+
+  function handleToggleCheckBox(itemKey) { 
+    setListItems(listItems.map((item) => {
+      if (item.key === itemKey) {
+        return {
+          ...item,
+          checked: !item.checked
+        }
+      } else {
+        return item;
+      }
+    }))
+  }
+  
   return (
     <>
-      <h1>To-do List: </h1>
+    <h1>To-do List: </h1>
       <AddListItem />
       <ul>
         <DisplayListItems />
