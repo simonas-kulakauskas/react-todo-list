@@ -32,7 +32,7 @@ function AddListItem({listItems, setListItems}) { // Adding items onto the list
 
   return (
     <form>
-      <input id="todoItemInputBox" type="text" placeholder="Enter item here..."></input>
+      <input id="todoItemInputBox" type="text" placeholder="Enter item here..." style={{marginRight: 10}}></input>
       <button type="submit" onClick={(e) => {
         e.preventDefault();
         handleAddItem(document.getElementById("todoItemInputBox").value);
@@ -65,10 +65,10 @@ function DisplayListItems({listItems, setListItems}) {
 
   function ListItem({item, handleToggleCheckBox, deleteListItem}) {
     return(
-      <li key={item.key}>
-          <input type="checkbox" id={item.key} onChange={() => handleToggleCheckBox(item.key)} checked={item.checked}></input> 
-          <label htmlFor={item.key} style={item.checked ? {textDecoration: 'line-through'} : {textDecoration: 'none'}}>{item.value}</label>
-          <button onClick={() => deleteListItem(item.key)}>X</button>
+      <li key={item.key} className='todo-list-items'>
+          <input type="checkbox" id={item.key} onChange={() => handleToggleCheckBox(item.key)} checked={item.checked} style={{marginRight: 10}}></input> 
+          <label htmlFor={item.key} style={item.checked ? {textDecoration: 'line-through', marginRight: 10} : {textDecoration: 'none', marginRight: 10}} >{item.value}</label>
+          <button onClick={() => deleteListItem(item.key)} style={{marginBottom: 5}}>X</button>
       </li>
     )
   }
