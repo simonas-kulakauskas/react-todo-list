@@ -10,6 +10,7 @@ import './App.css'
 * 5. Individual delete buttons for items                                              [✅]
 *   5b. Fix delete buttons...                                                         [✅]
 * 6. Reduce the return code for DisplayListItems()                                    [✅]
+* 7. Make a button that deletes all items that are checked off                        [❌]
 */
 
 function AddListItem({listItems, setListItems}) { // Adding items onto the list
