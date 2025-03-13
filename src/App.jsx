@@ -57,7 +57,7 @@ function AddListItem({ listItems, setListItems }) {
         Click
       </button>
       <button
-        style={{ backgroundColor: '#debdb8', border: '0' }}
+        style={{ backgroundColor: '#debdb8' }}
         onClick={(e) => {
           e.preventDefault();
           deleteStrickenItems();
