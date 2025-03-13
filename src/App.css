@@ -41,12 +41,11 @@
   color: #888;
 }
 
-
 .todo-list-items {
   list-style-type: none;
 }
 
-input[type=checkbox] {
+input[type='checkbox'] {
   width: 15px;
   height: 15px;
 }
