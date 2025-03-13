@@ -10,7 +10,7 @@ import './App.css'
 * 5. Individual delete buttons for items                                              [✅]
 *   5b. Fix delete buttons...                                                         [✅]
 * 6. Reduce the return code for DisplayListItems()                                    [✅]
-* 7. Make a button that deletes all items that are checked off                        [❌]
+* 7. Make a button that deletes all items that are checked off                        [✅]
 */
 
 function AddListItem({listItems, setListItems}) { // Adding items onto the list
@@ -31,13 +31,19 @@ function AddListItem({listItems, setListItems}) { // Adding items onto the list
     }
   }
 
+  const deleteStrickenItems = () => setListItems(listItems.filter((item) => !item.checked && item )); // Filter our items that are checked off.
+
   return (
     <form>
       <input id="todoItemInputBox" type="text" placeholder="Enter item here..." style={{marginRight: 10}}></input>
-      <button type="submit" onClick={(e) => {
+      <button type="submit" style={{marginRight: 10}} onClick={(e) => {
         e.preventDefault();
         handleAddItem(document.getElementById("todoItemInputBox").value);
         }}>Click</button>
+      <button style={{backgroundColor: "#debdb8", border: "0"}} onClick={(e) => {
+        e.preventDefault();
+        deleteStrickenItems();
+      }}>Clear Finished</button>
     </form>
   );
 }
