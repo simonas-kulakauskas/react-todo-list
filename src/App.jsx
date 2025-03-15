@@ -11,6 +11,7 @@ import './App.css';
  *   5b. Fix delete buttons...                                                         [✅]
  * 6. Reduce the return code for DisplayListItems()                                    [✅]
  * 7. Make a button that deletes all items that are checked off                        [✅]
+ * 8. Change up CSS Style!                                                             [✅]
  */
 
 function AddListItem({ listItems, setListItems }) {
@@ -44,11 +45,11 @@ function AddListItem({ listItems, setListItems }) {
         id="todoItemInputBox"
         type="text"
         placeholder="Enter item here..."
-        style={{ marginRight: 10 }}
+        // style={{ marginRight: 10 }}
       ></input>
       <button
         type="submit"
-        style={{ marginRight: 10 }}
+        // style={{ marginRight: 10 }}
         onClick={(e) => {
           e.preventDefault();
           handleAddItem(document.getElementById('todoItemInputBox').value);
@@ -57,7 +58,7 @@ function AddListItem({ listItems, setListItems }) {
         Click
       </button>
       <button
-        style={{ backgroundColor: '#debdb8' }}
+        id="clearFinishedButton"
         onClick={(e) => {
           e.preventDefault();
           deleteStrickenItems();
