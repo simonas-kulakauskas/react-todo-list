@@ -2,18 +2,6 @@ import { useEffect } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 import './App.css';
 
-/* ✅/❌
- * 1. Get data from 'data.js' and render as list items on unordered list.              [✅]
- * 2. Add the ability to add items to our own state list.                              [✅]
- * 3. Add checkmarks and ability to check / cross-out tasks that have been completed.  [✅]
- * 4. Add the ability to save to-do items locally.                                     [✅]
- * 5. Individual delete buttons for items                                              [✅]
- *   5b. Fix delete buttons...                                                         [✅]
- * 6. Reduce the return code for DisplayListItems()                                    [✅]
- * 7. Make a button that deletes all items that are checked off                        [✅]
- * 8. Change up CSS Style!                                                             [✅]
- */
-
 function AddListItem({ listItems, setListItems }) {
   // Adding items onto the list
   const resetInputBox = () =>
