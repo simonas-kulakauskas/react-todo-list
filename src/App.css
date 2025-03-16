@@ -34,6 +34,11 @@ button:hover,
   transition: background-color 0.35s;
 }
 
+button:not(:hover), /* Opposite of above... */
+#clearFinishedButton:not(:hover) {
+  transition: background-color 0.35s;
+}
+
 @media (prefers-color-scheme: light) {
   input {
     border: 2px solid #1a1a1a;
